@@ -137,7 +137,6 @@ const updateQuizProgress = function () {
   quizProgress++;
 };
 
-updateQuizProgress();
 showRandomWord();
 
 const showScore = function () {

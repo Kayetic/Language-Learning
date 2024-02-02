@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  height: 100dvh;
+  grid-template-rows: 50% 15% 35%;
+}
+
+header {
+  padding: 0 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+header h3 {
+  opacity: 0.5;
+}
+header h1 {
+  font-size: 1.5rem;
+  background-color: rgb(216, 218, 221);
+  padding: 1rem 1rem;
+  border-radius: 10px;
+}
+
+.hintContainer {
+  background-color: rgb(240, 242, 242);
+  padding: 1rem 1rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.hintContainer .hintText {
+  font-weight: 600;
+}
+
+inputFields {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+inputFields input {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  border: rgb(234, 232, 232) 2px solid;
+  border-radius: 5px;
+}
+inputFields button {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}/*# sourceMappingURL=fill-in-the-blank.css.map */
