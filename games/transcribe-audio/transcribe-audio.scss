@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  height: 100dvh;
+  grid-template-rows: 0.6fr 0.2fr 0.5fr 1fr;
+}
+
+.homeIcon {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  text-decoration: none;
+  color: black;
+  &:visited {
+    color: black;
+  }
+}
+
+.inputFields {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+
+  input {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    border: rgb(234, 232, 232) 2px solid;
+    border-radius: 5px;
+  }
+
+  button {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}

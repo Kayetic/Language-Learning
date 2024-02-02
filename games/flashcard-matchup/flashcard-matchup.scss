@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.homeIcon {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  text-decoration: none;
+  color: black;
+  &:visited {
+    color: black;
+  }
+}
+
+body {
+  display: grid;
+  place-items: center;
+  height: 100dvh;
+  grid-template-rows: 1fr 5fr;
+}
+
+.flashcard-container {
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  height: 100%;
+  width: 100%;
+  img {
+    width: 70%;
+    height: 70%;
+    // object-fit: cover;
+    border-radius: 10px;
+    background-color: #e3e3e398;
+    padding: 10px;
+  }
+}
+
+.outline {
+  outline: red solid 4px;
+}
