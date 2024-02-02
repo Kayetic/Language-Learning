@@ -40,3 +40,17 @@ wordChoices {
     cursor: pointer;
   }
 }
+
+.homeIcon {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  text-decoration: none;
+  color: black;
+  &:visited {
+    color: black;
+  }
+}

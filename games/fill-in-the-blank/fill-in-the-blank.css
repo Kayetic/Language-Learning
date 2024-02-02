@@ -61,4 +61,17 @@ inputFields button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.homeIcon {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+.homeIcon:visited {
+  color: black;
 }/*# sourceMappingURL=fill-in-the-blank.css.map */
