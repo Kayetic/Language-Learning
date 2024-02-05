@@ -8,8 +8,8 @@
 
 body {
   display: grid;
-  height: 80dvh;
-  padding-bottom: 2rem;
+  height: 90dvh;
+  // padding-bottom: 2rem;
   grid-template-rows: 1fr 2fr;
 }
 
@@ -44,12 +44,14 @@ gameButtons {
 
     p {
       width: 75%;
+      font-size: 0.85rem;
       text-align: center;
       opacity: 0.5;
       font-weight: 500;
     }
 
     button {
+      animation: breathingScale 1s;
       width: 100%;
       height: 10rem;
       padding: 1rem 2rem;
@@ -69,19 +71,26 @@ gameButtons {
 }
 
 .btn-game-choice {
-  background-color: #ebdfef;
+  background-color: rgb(235, 223, 239);
+  box-shadow: 0 0 20px 10px rgba(169, 128, 182, 0.2);
 }
 
 .btn-game-flashcards {
-  background-color: #f9e3e2;
+  background-color: rgb(249, 227, 226);
+  box-shadow: 0 0 20px 10px rgba(182, 128, 128, 0.2);
+  animation-delay: 0.5s;
 }
 
 .btn-game-gapfill {
-  background-color: #fdf9c9;
+  background-color: rgb(253, 249, 201);
+  box-shadow: 0 0 30px 10px rgba(182, 182, 128, 0.2);
+  animation-delay: 1s;
 }
 
 .btn-game-audio {
-  background-color: #d9e9fd;
+  background-color: rgb(217, 233, 253);
+  box-shadow: 0 0 20px 10px rgba(128, 182, 182, 0.2);
+  animation-delay: 1.5s;
 }
 
 .txt-game-choice {
@@ -98,4 +107,18 @@ gameButtons {
 
 .txt-game-audio {
   color: #181c44;
+}
+
+// make a breathing scale 1.2 animation that scales up and down and goes on forever
+
+@keyframes breathingScale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
