@@ -24,13 +24,13 @@ header h3 {
 }
 header h1 {
   font-size: 1.5rem;
-  background-color: rgb(216, 218, 221);
+  background-color: rgb(240, 242, 242);
   padding: 1rem 1rem;
   border-radius: 10px;
 }
 
 .hintContainer {
-  background-color: rgb(240, 242, 242);
+  background-color: rgba(255, 189, 46, 0.2705882353);
   padding: 1rem 1rem;
   border-radius: 10px;
   display: flex;
@@ -61,6 +61,7 @@ inputFields button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  background-color: rgba(255, 189, 46, 0.2705882353);
 }
 
 .homeIcon {

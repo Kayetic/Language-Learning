@@ -30,14 +30,14 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.25rem;
 
   input {
     width: 100%;
     padding: 1rem 2rem;
     font-size: 1.5rem;
     border: rgb(234, 232, 232) 2px solid;
-    border-radius: 5px;
+    border-radius: 10px 10px 0 0;
   }
 
   button {
@@ -45,7 +45,10 @@ body {
     padding: 1rem 2rem;
     font-size: 1.5rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 0 0 10px 10px;
     cursor: pointer;
+    background-color: #dae4fa;
+    color: darkblue;
+    font-weight: 700;
   }
 }

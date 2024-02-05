@@ -90,6 +90,10 @@ const correctAnswers = [
   "zebra",
 ];
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 const showRandomWord = function () {
   if (englishWords.length === 0) {
     showScore();
@@ -100,7 +104,7 @@ const showRandomWord = function () {
   const randomWord = englishWords[randomIndex];
   const potentialAnswersForWord = potentialAnswers[randomWord];
   const correctAnswerForWord = correctAnswers[randomIndex];
-  englishWordElement.textContent = randomWord;
+  englishWordElement.textContent = capitalizeFirstLetter(randomWord);
   // remove the option from the arrays and dictionary to prevent it from being used again
   englishWords.splice(randomIndex, 1);
   delete potentialAnswers[randomWord];
@@ -111,9 +115,9 @@ const showRandomWord = function () {
   console.log(correctAnswers);
 
   choiceButtons.forEach((button, index) => {
-    button.textContent = potentialAnswersForWord[index];
+    button.textContent = capitalizeFirstLetter(potentialAnswersForWord[index]);
     button.onclick = function () {
-      if (button.textContent === correctAnswerForWord) {
+      if (button.textContent.toLowerCase() === correctAnswerForWord) {
         alert("Correct!");
         updateQuizProgress();
         showRandomWord();
