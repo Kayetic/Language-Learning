@@ -8,7 +8,7 @@
 
 body {
   display: grid;
-  height: 100dvh;
+  height: 80dvh;
   grid-template-rows: 1fr 2fr;
 }
 
