@@ -21,21 +21,19 @@ const words = [
   "żyrafa",
 ];
 
-function getRandomItems(arr, n) {
-  const result = [];
-  while (result.length < n) {
-    // random number between 0 and 15 without using array length
-    const randomIndex = Math.floor(Math.random() * 16);
-    console.log(`Random index: ${randomIndex}`);
-    console.log(`Random item: ${arr[randomIndex]}`);
-    const item = arr[randomIndex];
-    result.push(item);
+function getRandomNumbers(n) {
+  // make a list of unique random numbers between 0 and 15 (inclusive), the amount generated should be n
+  const randomNumbers = [];
+  while (randomNumbers.length < n) {
+    const randomNumber = Math.floor(Math.random() * words.length);
+    if (!randomNumbers.includes(randomNumber)) {
+      randomNumbers.push(randomNumber);
+    }
   }
-  console.log(`Result: ${result}`);
-  return result;
+  return randomNumbers;
 }
 
-function handleGameLogic(items) {
+function handleGameLogic(randomNumbers) {
   let selectedAmount = 0;
   let firstSelected = "";
   let secondSelected = "";
@@ -47,13 +45,13 @@ function handleGameLogic(items) {
   flashcardItems.forEach((item, index) => {
     if (item.tagName === "IMG") {
       // It's an image, set the src attribute
-      const imageName = encodeURIComponent(items[index]) + ".png"; // URL encode the filename
+      const imageName = randomNumbers[index] + ".png";
       item.src = `./flashcard-images/${imageName}`;
       console.log(`Image path set to: ${item.src}`); // Log the image path for debugging
     } else {
       // It's not an image, set the text content
-      item.textContent = items[index];
-      console.log(`Text content set to: ${items[index]}`); // Log the text content for debugging
+      item.textContent = randomNumbers[index];
+      console.log(`Text content set to: ${randomNumbers[index]}`); // Log the text content for debugging
     }
 
     item.addEventListener("click", () => {
@@ -125,5 +123,5 @@ function handleGameLogic(items) {
   });
 }
 
-const randomItems = getRandomItems(words, 4);
+const randomItems = getRandomNumbers(words, 4);
 handleGameLogic(randomItems);

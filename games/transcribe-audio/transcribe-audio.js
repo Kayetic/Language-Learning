@@ -24,16 +24,14 @@ const englishAudioWords = [
   "water",
 ];
 
-const audioElement = document.querySelector(".audioElement");
+const audioElement = document.querySelector("Audio");
 const textElement = document.querySelector(".audioText");
 
-const randomIndex = Math.floor(Math.random() * polishAudioWords.length);
+let randomIndex = Math.floor(Math.random() * polishAudioWords.length);
 console.log(`Random index: ${randomIndex}`);
 
-const polishWord = polishAudioWords[randomIndex];
-const englishWord = englishAudioWords[randomIndex];
-
-// textElement.textContent = englishWord;
+let polishWord = polishAudioWords[randomIndex];
+let englishWord = englishAudioWords[randomIndex];
 
 audioElement.src = `./recordings/${randomIndex}.mp3`;
 
@@ -42,9 +40,15 @@ const submitButton = document.querySelector(".submitButton");
 
 submitButton.onclick = function () {
   if (userInputField.value === polishWord) {
-    alert("Correct!");
     userInputField.value = "";
-    location.reload();
+    const newRandomIndex = Math.floor(Math.random() * polishAudioWords.length);
+    polishWord = polishAudioWords[newRandomIndex];
+    englishWord = englishAudioWords[newRandomIndex];
+    audioElement.src = `./recordings/${newRandomIndex}.mp3`;
+    audioElement.load(); // reloads the audio element with the new src
+    console.log(`New random index: ${newRandomIndex}`);
+    console.log(audioElement.src);
+    alert("Correct!");
   } else {
     alert("Incorrect!");
     userInputField.value = "";
