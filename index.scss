@@ -9,6 +9,7 @@
 body {
   display: grid;
   height: 80dvh;
+  padding-bottom: 2rem;
   grid-template-rows: 1fr 2fr;
 }
 
@@ -27,10 +28,10 @@ gameButtons {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 1rem;
+  gap: 1.5rem;
   height: 24rem;
 
-  padding: 0 2rem;
+  padding: 0 3rem;
 
   a {
     display: flex;
