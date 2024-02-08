@@ -36,7 +36,47 @@ function getUniqueRandomIndices(n) {
   return selectedIndices; // Return the indices of the words to be used in this round
 }
 
+let matchedPairs = 0;
+
+function checkForWin() {
+  if (matchedPairs === 4) {
+    matchedPairs = 0;
+    // select all flashcard items and remove them
+    const flashcardItems = document.querySelectorAll(".flashcard-item");
+    flashcardItems.forEach((item) => {
+      item.remove();
+    });
+    setupRound();
+  }
+}
+
+function resetAndPrepareFlashcards() {
+  const flashcardContainer = document.querySelector(".flashcard-container");
+
+  // Clear existing content
+  flashcardContainer.innerHTML = "";
+
+  // Create and append new flashcard elements
+  for (let i = 0; i < 4; i++) {
+    // Assuming 4 pairs (8 elements total)
+    const imgElement = document.createElement("img");
+    imgElement.className = "flashcard-item";
+    imgElement.src = "";
+    imgElement.alt = "";
+
+    const textElement = document.createElement("h2");
+    textElement.className = "flashcard-item";
+    textElement.textContent = ""; // Initially empty, will be set in setupRound
+
+    flashcardContainer.appendChild(imgElement);
+    flashcardContainer.appendChild(textElement);
+  }
+}
+
 function setupRound() {
+  resetAndPrepareFlashcards();
+  addEventListenersToFlashcards();
+
   const selectedIndices = getUniqueRandomIndices(4); // Get 4 unique indices for the round
 
   const imageElements = document.querySelectorAll("img");
@@ -74,9 +114,6 @@ function shuffleArray(array) {
   }
   return array; // This line is optional since the array is modified in place
 }
-
-const imageElements = document.querySelectorAll("img");
-const textElements = document.querySelectorAll("h2");
 
 let firstElement = null;
 let secondElement = null;
@@ -116,6 +153,9 @@ function checkForMatch() {
       // Correct match, make opacity 0
       imageElement.style.opacity = "0";
       textElement.style.opacity = "0";
+      matchedPairs++;
+      checkForWin();
+      console.log(matchedPairs);
     } else {
       // Incorrect match, remove outlines
       imageElement.classList.remove("outline");
@@ -130,50 +170,55 @@ function checkForMatch() {
   resetSelections(); // Reset selections for next action
 }
 
-imageElements.forEach((imageElement) => {
-  imageElement.addEventListener("click", () => {
-    if (!firstElement) {
-      // If there's no firstElement selected yet, select this one
-      firstElement = imageElement;
-      imageElement.classList.add("outline");
-    } else if (firstElement.dataset.type === "text") {
-      // If the firstElement is a text, this can be the secondElement
-      secondElement = imageElement;
-      checkForMatch(); // Check for a match between the first and second element
-    } else {
-      // If trying to select another image when an image is already selected
-      firstElement.classList.remove("outline"); // Remove outline from previous selection
-      firstElement = imageElement; // Make this the firstElement
-      secondElement = null; // Reset secondElement
-      document
-        .querySelectorAll(".outline")
-        .forEach((el) => el.classList.remove("outline")); // Remove all outlines
-      imageElement.classList.add("outline"); // Add outline to the new firstElement
-    }
-    console.log("Selected Element (Image):", imageElement); // Logging selected element
-  });
-});
+function addEventListenersToFlashcards() {
+  const imageElements = document.querySelectorAll("img");
+  const textElements = document.querySelectorAll("h2");
 
-textElements.forEach((textElement) => {
-  textElement.addEventListener("click", () => {
-    if (!firstElement) {
-      // If there's no firstElement selected yet, select this one
-      firstElement = textElement;
-      textElement.classList.add("outline");
-    } else if (firstElement.dataset.type === "image") {
-      // If the firstElement is an image, this can be the secondElement
-      secondElement = textElement;
-      checkForMatch(); // Check for a match between the first and second element
-    } else {
-      // If trying to select another text when a text is already selected
-      firstElement.classList.remove("outline"); // Remove outline from previous selection
-      firstElement = textElement; // Make this the firstElement
-      secondElement = null; // Reset secondElement
-      document
-        .querySelectorAll(".outline")
-        .forEach((el) => el.classList.remove("outline")); // Remove all outlines
-      textElement.classList.add("outline"); // Add outline to the new firstElement
-    }
-    console.log("Selected Element (Text):", textElement); // Logging selected element
+  imageElements.forEach((imageElement) => {
+    imageElement.addEventListener("click", () => {
+      if (!firstElement) {
+        // If there's no firstElement selected yet, select this one
+        firstElement = imageElement;
+        imageElement.classList.add("outline");
+      } else if (firstElement.dataset.type === "text") {
+        // If the firstElement is a text, this can be the secondElement
+        secondElement = imageElement;
+        checkForMatch(); // Check for a match between the first and second element
+      } else {
+        // If trying to select another image when an image is already selected
+        firstElement.classList.remove("outline"); // Remove outline from previous selection
+        firstElement = imageElement; // Make this the firstElement
+        secondElement = null; // Reset secondElement
+        document
+          .querySelectorAll(".outline")
+          .forEach((el) => el.classList.remove("outline")); // Remove all outlines
+        imageElement.classList.add("outline"); // Add outline to the new firstElement
+      }
+      console.log("Selected Element (Image):", imageElement); // Logging selected element
+    });
   });
-});
+
+  textElements.forEach((textElement) => {
+    textElement.addEventListener("click", () => {
+      if (!firstElement) {
+        // If there's no firstElement selected yet, select this one
+        firstElement = textElement;
+        textElement.classList.add("outline");
+      } else if (firstElement.dataset.type === "image") {
+        // If the firstElement is an image, this can be the secondElement
+        secondElement = textElement;
+        checkForMatch(); // Check for a match between the first and second element
+      } else {
+        // If trying to select another text when a text is already selected
+        firstElement.classList.remove("outline"); // Remove outline from previous selection
+        firstElement = textElement; // Make this the firstElement
+        secondElement = null; // Reset secondElement
+        document
+          .querySelectorAll(".outline")
+          .forEach((el) => el.classList.remove("outline")); // Remove all outlines
+        textElement.classList.add("outline"); // Add outline to the new firstElement
+      }
+      console.log("Selected Element (Text):", textElement); // Logging selected element
+    });
+  });
+}
