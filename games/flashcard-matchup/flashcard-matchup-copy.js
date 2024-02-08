@@ -50,6 +50,17 @@ function checkForWin() {
   }
 }
 
+let roundsPlayed = 0;
+function checkForEndGame() {
+  if (roundsPlayed === 4) {
+    // End game
+    console.log("Game over");
+    alert("Game over");
+    // move user window back to ../../index.html
+    window.location.href = "../../index.html";
+  }
+}
+
 function resetAndPrepareFlashcards() {
   const flashcardContainer = document.querySelector(".flashcard-container");
 
@@ -100,6 +111,9 @@ function setupRound() {
       textElements[count].dataset.match = index;
     }
   });
+
+  roundsPlayed++;
+  checkForEndGame();
 }
 
 // Call setupRound() to start a round
