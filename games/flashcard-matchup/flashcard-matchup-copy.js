@@ -104,7 +104,10 @@ function setupRound() {
       imageElements[count].dataset.type = "image";
       imageElements[count].dataset.match = index; // Match based on original word index
     }
+  });
 
+  shuffleArray(selectedIndices); // Shuffle the selectedIndices array again to mix up the order
+  selectedIndices.forEach((index, count) => {
     if (textElements[count]) {
       textElements[count].textContent = words[index];
       textElements[count].dataset.type = "text";
