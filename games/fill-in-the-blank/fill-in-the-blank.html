@@ -9,6 +9,7 @@
       crossorigin="anonymous"
     ></script>
     <title>Fill in the Blank</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
   </head>
   <body>
     <a href="../../index.html" class="homeIcon"
@@ -24,7 +25,12 @@
     </header>
     <p class="quizProgress"></p>
     <inputFields>
-      <input type="text" class="userInput" />
+      <input
+        type="text"
+        class="userInput"
+        autocapitalize="none"
+        style="text-transform: lowercase"
+      />
       <button class="submitButton">Submit</button>
     </inputFields>
     <script src="fill-in-the-blank.js"></script>

@@ -17,8 +17,8 @@ const correctAnswers = [
   "mlekiem",
   "światowej",
   "zielony",
-  "parasol",
-  "gniazdo",
+  "parasolkę",
+  "gniazda",
   "labradora",
   "wodę",
   "słoneczne",
@@ -67,7 +67,7 @@ const showRandomSentence = function () {
   updateQuizProgress();
 
   submitButton.onclick = function () {
-    if (userInput.value === correctAnswerForSentence) {
+    if (userInput.value.trim() === correctAnswerForSentence) {
       alert("Correct!");
       showRandomSentence();
       correctAnswersTotal++;
