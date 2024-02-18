@@ -48,4 +48,8 @@ body {
   background-color: #dae4fa;
   color: darkblue;
   font-weight: 700;
+}
+
+h3 {
+  opacity: 0.5;
 }/*# sourceMappingURL=transcribe-audio.css.map */

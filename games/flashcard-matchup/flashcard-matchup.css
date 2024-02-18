@@ -51,4 +51,8 @@ body {
 
 .flashcard-item {
   transition: opacity 0.25s;
+}
+
+h3 {
+  opacity: 0.5;
 }/*# sourceMappingURL=flashcard-matchup.css.map */

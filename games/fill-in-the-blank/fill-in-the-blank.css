@@ -75,4 +75,9 @@ inputFields button {
 }
 .homeIcon:visited {
   color: black;
+}
+
+.submitButton {
+  color: black;
+  font-weight: 700;
 }/*# sourceMappingURL=fill-in-the-blank.css.map */
