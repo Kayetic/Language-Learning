@@ -43,6 +43,17 @@ if (isFirstLoad) {
   isFirstLoad = false;
 }
 
+const progressElement = document.querySelector(".quizProgress");
+
+let quizProgress = 1;
+
+const updateQuizProgress = function () {
+  progressElement.textContent = `Question ${quizProgress} of 10`;
+  quizProgress++;
+};
+
+updateQuizProgress();
+
 const userInputField = document.querySelector(".userInput");
 const submitButton = document.querySelector(".submitButton");
 
@@ -57,6 +68,7 @@ submitButton.onclick = function () {
     audioElement.load(); // reloads the audio element with the new src
     console.log(`New random index: ${newRandomIndex}`);
     console.log(audioElement.src);
+    updateQuizProgress();
     alert("Correct!");
   } else {
     alert("Incorrect!");
