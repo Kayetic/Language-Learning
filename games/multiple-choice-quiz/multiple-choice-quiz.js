@@ -144,5 +144,10 @@ const updateQuizProgress = function () {
 showRandomWord();
 
 const showScore = function () {
+  quizProgressElement.textContent = "Quiz complete!";
   alert(`You got ${correctAnswersTotal} out of 26 correct!`);
+};
+
+window.onload = function () {
+  updateQuizProgress();
 };
