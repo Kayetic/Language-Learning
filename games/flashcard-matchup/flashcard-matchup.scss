@@ -36,15 +36,19 @@ body {
   height: 100%;
   width: 100%;
   img {
-    width: 70%;
-    height: 70%;
-    // object-fit: cover;
+    width: 60%;
+    height: auto;
+    object-fit: resize;
     border-radius: 10px;
     background-color: #e3e3e398;
-    padding: 10px;
+    padding: 20px;
   }
 }
 
 .outline {
   outline: red solid 4px;
+}
+
+.flashcard-item {
+  transition: opacity 0.25s;
 }

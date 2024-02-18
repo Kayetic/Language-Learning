@@ -36,13 +36,19 @@ body {
   width: 100%;
 }
 .flashcard-container img {
-  width: 70%;
-  height: 70%;
+  width: 60%;
+  height: auto;
+  -o-object-fit: resize;
+     object-fit: resize;
   border-radius: 10px;
   background-color: rgba(227, 227, 227, 0.5960784314);
-  padding: 10px;
+  padding: 20px;
 }
 
 .outline {
   outline: red solid 4px;
+}
+
+.flashcard-item {
+  transition: opacity 0.25s;
 }/*# sourceMappingURL=flashcard-matchup.css.map */
