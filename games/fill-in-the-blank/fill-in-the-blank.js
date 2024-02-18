@@ -46,7 +46,7 @@ const hintElement = document.getElementById("hint");
 let quizProgress = 1;
 
 const updateQuizProgress = function () {
-  progressElement.textContent = `Question ${quizProgress} of 26`;
+  progressElement.textContent = `Question ${quizProgress} of 10`;
   quizProgress++;
 };
 

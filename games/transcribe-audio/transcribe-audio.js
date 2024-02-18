@@ -33,13 +33,22 @@ console.log(`Random index: ${randomIndex}`);
 let polishWord = polishAudioWords[randomIndex];
 let englishWord = englishAudioWords[randomIndex];
 
-audioElement.src = `./recordings/${randomIndex}.mp3`;
+// audioElement.src = `./recordings/${randomIndex}.mp3`;
+
+isFirstLoad = true;
+
+if (isFirstLoad) {
+  audioElement.src = `./recordings/0.mp3`;
+  polishWord = polishAudioWords[0];
+  isFirstLoad = false;
+}
 
 const userInputField = document.querySelector(".userInput");
 const submitButton = document.querySelector(".submitButton");
 
 submitButton.onclick = function () {
-  if (userInputField.value === polishWord) {
+  console.log(`User input: ${userInputField.value}`);
+  if (userInputField.value.trim() === polishWord) {
     userInputField.value = "";
     const newRandomIndex = Math.floor(Math.random() * polishAudioWords.length);
     polishWord = polishAudioWords[newRandomIndex];
