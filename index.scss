@@ -109,8 +109,6 @@ gameButtons {
   color: #181c44;
 }
 
-// make a breathing scale 1.2 animation that scales up and down and goes on forever
-
 @keyframes breathingScale {
   0% {
     transform: scale(1);
