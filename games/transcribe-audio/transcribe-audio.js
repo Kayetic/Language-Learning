@@ -1,14 +1,14 @@
 const polishAudioWords = [
-  "jabłko", // apple
-  "samochód", // car
-  "książka", // book
-  "słońce", // sun
-  "kwiat", // flower
-  "stół", // table
-  "piłka", // ball
-  "kot", // cat
-  "drzewo", // tree
-  "woda", // water
+  "jabłko",
+  "samochód",
+  "książka",
+  "słońce",
+  "kwiat",
+  "stół",
+  "piłka",
+  "kot",
+  "drzewo",
+  "woda",
 ];
 
 const englishAudioWords = [
@@ -33,15 +33,7 @@ console.log(`Random index: ${randomIndex}`);
 let polishWord = polishAudioWords[randomIndex];
 let englishWord = englishAudioWords[randomIndex];
 
-// audioElement.src = `./recordings/${randomIndex}.mp3`;
-
-isFirstLoad = true;
-
-if (isFirstLoad) {
-  audioElement.src = `./recordings/0.mp3`;
-  polishWord = polishAudioWords[0];
-  isFirstLoad = false;
-}
+audioElement.src = `./recordings/${randomIndex}.mp3`;
 
 const progressElement = document.querySelector(".quizProgress");
 

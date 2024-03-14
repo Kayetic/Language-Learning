@@ -23,7 +23,10 @@ function getIndexFromWord(word) {
 }
 
 // Initialize an array of indices corresponding to the words array
-let availableIndices = words.map((_, index) => index);
+let availableIndices = [];
+for (let i = 0; i < words.length; i++) {
+  availableIndices.push(i);
+}
 
 function getUniqueRandomIndices(n) {
   let selectedIndices = [];
