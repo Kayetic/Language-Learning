@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -23,6 +25,10 @@ header {
   h2 {
     opacity: 0.5;
   }
+
+  * {
+    font-family: "Space Grotesk", sans-serif;
+  }
 }
 
 wordChoices {
@@ -41,6 +47,8 @@ wordChoices {
     cursor: pointer;
     background-color: #ebdfef;
     color: #3f1a4b;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 500;
   }
 }
 
@@ -55,5 +63,29 @@ wordChoices {
   color: black;
   &:visited {
     color: black;
+  }
+}
+
+.animate {
+  animation: scaleUpDown 0.5s forwards, boxShadowFade 1s forwards;
+}
+
+@keyframes scaleUpDown {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes boxShadowFade {
+  0% {
+    box-shadow: 0 0 20px 10px rgba(147, 112, 216, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 60px 30px rgba(0, 0, 0, 0);
   }
 }

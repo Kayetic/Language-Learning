@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -46,13 +48,79 @@ body {
 }
 
 .outline {
-  outline: red solid 4px;
+  outline: rgba(234, 137, 174, 0.696) solid 4px;
 }
 
 .flashcard-item {
   transition: opacity 0.25s;
+
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-family: "Space Grotesk", sans-serif;
+
+  transition: color 0.2s ease-in-out;
 }
 
 h3 {
   opacity: 0.5;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.animate {
+  animation: scaleUpDown 0.5s forwards, boxShadowFade 1s forwards;
+}
+
+@keyframes scaleUpDown {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.975);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes boxShadowFade {
+  0% {
+    box-shadow: 0 0 20px 10px rgba(216, 112, 138, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 60px 30px rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-10px);
+  }
+  20% {
+    transform: translateX(10px);
+  }
+  30% {
+    transform: translateX(-10px);
+  }
+  40% {
+    transform: translateX(10px);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+  60% {
+    transform: translateX(10px);
+  }
+  70% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.error {
+  animation: shake 0.4s linear;
+  color: rgba(255, 0, 0, 0.776);
 }

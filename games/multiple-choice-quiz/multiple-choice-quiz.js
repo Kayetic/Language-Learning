@@ -95,6 +95,8 @@ function capitalizeFirstLetter(string) {
 }
 
 const showRandomWord = function () {
+  // addAnimations();
+
   if (englishWords.length === 0) {
     showScore();
     return;
@@ -118,14 +120,26 @@ const showRandomWord = function () {
     button.textContent = capitalizeFirstLetter(potentialAnswersForWord[index]);
     button.onclick = function () {
       if (button.textContent.toLowerCase() === correctAnswerForWord) {
-        alert("Correct!");
+        setTimeout(() => {
+          alert("Correct!");
+          showRandomWord();
+        }, 300);
+        button.classList.add("animate");
+        setTimeout(() => {
+          button.classList.remove("animate");
+        }, 500);
         updateQuizProgress();
-        showRandomWord();
         correctAnswersTotal++;
       } else {
-        alert("Incorrect!");
+        setTimeout(() => {
+          alert("Incorrect!");
+          showRandomWord();
+        }, 300);
+        button.classList.add("animate");
+        setTimeout(() => {
+          button.classList.remove("animate");
+        }, 500);
         updateQuizProgress();
-        showRandomWord();
       }
     };
   });
@@ -151,3 +165,23 @@ const showScore = function () {
 window.onload = function () {
   updateQuizProgress();
 };
+
+function addAnimations() {
+  document.querySelectorAll(".randomWordButton").forEach(function (element) {
+    // Function to add and remove 'animate' class
+    function triggerAnimation() {
+      element.classList.add("animate");
+
+      // Remove the class after the animation completes to reset the animation
+      setTimeout(() => {
+        element.classList.remove("animate");
+      }, 1000); // Match the animation duration
+    }
+
+    // Activate animation on click
+    element.addEventListener("click", triggerAnimation);
+
+    // Activate animation on focus (e.g., when selected with Tab key)
+    element.addEventListener("focus", triggerAnimation);
+  });
+}

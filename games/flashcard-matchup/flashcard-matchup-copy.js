@@ -59,7 +59,6 @@ function checkForEndGame() {
     // End game
     console.log("Game over");
     alert("Game over");
-    // move user window back to ../../index.html
     window.location.href = "../../index.html";
   }
 }
@@ -90,6 +89,7 @@ function resetAndPrepareFlashcards() {
 function setupRound() {
   resetAndPrepareFlashcards();
   addEventListenersToFlashcards();
+  addAnimations();
 
   const selectedIndices = getUniqueRandomIndices(4); // Get 4 unique indices for the round
 
@@ -149,10 +149,8 @@ function resetSelections() {
 
 function checkForMatch() {
   if (!firstElement || !secondElement) return;
-
   const firstType = firstElement.dataset.type;
   const secondType = secondElement.dataset.type;
-
   if (firstType !== secondType) {
     // Proceed to check if they match
     let imageElement, textElement;
@@ -163,30 +161,36 @@ function checkForMatch() {
       imageElement = secondElement;
       textElement = firstElement;
     }
-
     const imageIndex = parseInt(
       imageElement.src.split("/").pop().split(".").shift()
     );
     const textWord = textElement.textContent;
-
     if (words[imageIndex] === textWord) {
-      // Correct match, make opacity 0
+      // Correct match, make opacity 0 and add animations
       imageElement.style.opacity = "0";
       textElement.style.opacity = "0";
+      imageElement.classList.add("animate");
+      textElement.classList.add("animate");
       matchedPairs++;
       checkForWin();
       console.log(matchedPairs);
     } else {
-      // Incorrect match, remove outlines
-      imageElement.classList.remove("outline");
-      textElement.classList.remove("outline");
+      // Incorrect match, add .error class only
+      imageElement.classList.add("error");
+      textElement.classList.add("error");
+      // Remove the "error" class after 400ms
+      setTimeout(() => {
+        imageElement.classList.remove("error");
+        textElement.classList.remove("error");
+        imageElement.classList.remove("animate");
+        textElement.classList.remove("animate");
+      }, 400);
     }
   } else {
     // Same type, remove outlines
     firstElement.classList.remove("outline");
     secondElement.classList.remove("outline");
   }
-
   resetSelections(); // Reset selections for next action
 }
 
@@ -240,5 +244,25 @@ function addEventListenersToFlashcards() {
       }
       console.log("Selected Element (Text):", textElement); // Logging selected element
     });
+  });
+}
+
+function addAnimations() {
+  document.querySelectorAll(".flashcard-item").forEach(function (element) {
+    // Function to add and remove 'animate' class
+    function triggerAnimation() {
+      element.classList.add("animate");
+
+      // Remove the class after the animation completes to reset the animation
+      setTimeout(() => {
+        element.classList.remove("animate");
+      }, 1000); // Match the animation duration
+    }
+
+    // Activate animation on click
+    element.addEventListener("click", triggerAnimation);
+
+    // Activate animation on focus (e.g., when selected with Tab key)
+    element.addEventListener("focus", triggerAnimation);
   });
 }
