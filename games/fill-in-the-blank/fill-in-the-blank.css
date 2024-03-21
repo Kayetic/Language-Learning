@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -28,6 +29,9 @@ header h1 {
   padding: 1rem 1rem;
   border-radius: 10px;
 }
+header * {
+  font-family: "Space Grotesk", sans-serif;
+}
 
 .hintContainer {
   background-color: rgba(255, 189, 46, 0.2705882353);
@@ -53,6 +57,8 @@ inputFields input {
   font-size: 1.5rem;
   border: rgb(234, 232, 232) 2px solid;
   border-radius: 10px 10px 0 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 500;
 }
 inputFields button {
   width: 100%;
@@ -62,6 +68,7 @@ inputFields button {
   border-radius: 0 0 10px 10px;
   cursor: pointer;
   background-color: rgba(255, 189, 46, 0.2705882353);
+  font-family: "Space Grotesk", sans-serif;
 }
 
 .homeIcon {
@@ -80,4 +87,27 @@ inputFields button {
 .submitButton {
   color: black;
   font-weight: 700;
+}
+
+@keyframes scaleUpDown {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.975);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes boxShadowFade {
+  0% {
+    box-shadow: 0 0 20px 10px rgba(255, 237, 203, 0.6666666667);
+  }
+  100% {
+    box-shadow: 0 0 60px 30px rgba(0, 0, 0, 0);
+  }
+}
+.animate {
+  animation: scaleUpDown 0.5s forwards, boxShadowFade 1s forwards;
 }/*# sourceMappingURL=fill-in-the-blank.css.map */

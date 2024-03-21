@@ -67,16 +67,21 @@ const showRandomSentence = function () {
   updateQuizProgress();
 
   submitButton.onclick = function () {
-    if (userInput.value.trim() === correctAnswerForSentence) {
-      alert("Correct!");
-      showRandomSentence();
-      correctAnswersTotal++;
-      userInput.value = "";
-    } else {
-      alert("Incorrect!");
-      userInput.value = "";
-      showRandomSentence();
-    }
+    submitButton.classList.add("animate");
+    setTimeout(() => {
+      submitButton.classList.remove("animate");
+
+      if (userInput.value.trim() === correctAnswerForSentence) {
+        alert("Correct!");
+        showRandomSentence();
+        correctAnswersTotal++;
+        userInput.value = "";
+      } else {
+        alert("Incorrect!");
+        userInput.value = "";
+        showRandomSentence();
+      }
+    }, 500);
   };
 };
 

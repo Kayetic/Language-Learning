@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -29,6 +31,10 @@ header {
     padding: 1rem 1rem;
     border-radius: 10px;
   }
+
+  * {
+    font-family: "Space Grotesk", sans-serif;
+  }
 }
 
 .hintContainer {
@@ -57,6 +63,9 @@ inputFields {
     font-size: 1.5rem;
     border: rgb(234, 232, 232) 2px solid;
     border-radius: 10px 10px 0 0;
+
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 500;
   }
 
   button {
@@ -67,6 +76,7 @@ inputFields {
     border-radius: 0 0 10px 10px;
     cursor: pointer;
     background-color: #ffbd2e45;
+    font-family: "Space Grotesk", sans-serif;
   }
 }
 
@@ -87,4 +97,28 @@ inputFields {
 .submitButton {
   color: black;
   font-weight: 700;
+}
+
+@keyframes scaleUpDown {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.975);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes boxShadowFade {
+  0% {
+    box-shadow: 0 0 20px 10px #ffedcbaa;
+  }
+  100% {
+    box-shadow: 0 0 60px 30px rgba(0, 0, 0, 0);
+  }
+}
+
+.animate {
+  animation: scaleUpDown 0.5s forwards, boxShadowFade 1s forwards;
 }

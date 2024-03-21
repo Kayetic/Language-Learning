@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -38,6 +40,9 @@ body {
     font-size: 1.5rem;
     border: rgb(234, 232, 232) 2px solid;
     border-radius: 10px 10px 0 0;
+
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 500;
   }
 
   button {
@@ -50,9 +55,37 @@ body {
     background-color: #dae4fa;
     color: darkblue;
     font-weight: 700;
+
+    font-family: "Space Grotesk", sans-serif;
   }
 }
 
 h3 {
   opacity: 0.5;
+
+  font-family: "Space Grotesk", sans-serif;
+}
+
+@keyframes scaleUpDown {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.975);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes boxShadowFade {
+  0% {
+    box-shadow: 0 0 20px 10px #cbe1ffaa;
+  }
+  100% {
+    box-shadow: 0 0 60px 30px rgba(0, 0, 0, 0);
+  }
+}
+
+.animate {
+  animation: scaleUpDown 0.5s forwards, boxShadowFade 1s forwards;
 }

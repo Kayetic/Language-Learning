@@ -51,19 +51,27 @@ const submitButton = document.querySelector(".submitButton");
 
 submitButton.onclick = function () {
   console.log(`User input: ${userInputField.value}`);
-  if (userInputField.value.trim() === polishWord) {
-    userInputField.value = "";
-    const newRandomIndex = Math.floor(Math.random() * polishAudioWords.length);
-    polishWord = polishAudioWords[newRandomIndex];
-    englishWord = englishAudioWords[newRandomIndex];
-    audioElement.src = `./recordings/${newRandomIndex}.mp3`;
-    audioElement.load(); // reloads the audio element with the new src
-    console.log(`New random index: ${newRandomIndex}`);
-    console.log(audioElement.src);
-    updateQuizProgress();
-    alert("Correct!");
-  } else {
-    alert("Incorrect!");
-    userInputField.value = "";
-  }
+
+  submitButton.classList.add("animate");
+  setTimeout(() => {
+    submitButton.classList.remove("animate");
+
+    if (userInputField.value.trim() === polishWord) {
+      userInputField.value = "";
+      const newRandomIndex = Math.floor(
+        Math.random() * polishAudioWords.length
+      );
+      polishWord = polishAudioWords[newRandomIndex];
+      englishWord = englishAudioWords[newRandomIndex];
+      audioElement.src = `./recordings/${newRandomIndex}.mp3`;
+      audioElement.load(); // reloads the audio element with the new src
+      console.log(`New random index: ${newRandomIndex}`);
+      console.log(audioElement.src);
+      updateQuizProgress();
+      alert("Correct!");
+    } else {
+      alert("Incorrect!");
+      userInputField.value = "";
+    }
+  }, 300);
 };
