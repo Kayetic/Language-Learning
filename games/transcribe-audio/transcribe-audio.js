@@ -49,6 +49,9 @@ updateQuizProgress();
 const userInputField = document.querySelector(".userInput");
 const submitButton = document.querySelector(".submitButton");
 
+let correctAnswersTotal = 0;
+let incorrectAnswersTotal = 0;
+
 submitButton.onclick = function () {
   console.log(`User input: ${userInputField.value}`);
 
@@ -67,11 +70,27 @@ submitButton.onclick = function () {
       audioElement.load(); // reloads the audio element with the new src
       console.log(`New random index: ${newRandomIndex}`);
       console.log(audioElement.src);
+      correctAnswersTotal++;
       updateQuizProgress();
       alert("Correct!");
     } else {
+      incorrectAnswersTotal++;
       alert("Incorrect!");
       userInputField.value = "";
     }
   }, 300);
 };
+
+document.querySelector(".homeIcon").addEventListener("click", () => {
+  // get the accuracy of the user's answers from the correctAnswersTotal and incorrectAnswersTotal variables, then save it to an array of accuracies for this game
+  const accuracy =
+    (correctAnswersTotal / (correctAnswersTotal + incorrectAnswersTotal)) * 100;
+  const accuracies = JSON.parse(localStorage.getItem("accuracies")) || [];
+  accuracies.push(accuracy);
+  localStorage.setItem("audioAccuracies", JSON.stringify(accuracies));
+
+  localStorage.setItem(
+    "audioPlays",
+    Number(localStorage.getItem("audioPlays")) + 1
+  );
+});

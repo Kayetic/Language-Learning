@@ -17,6 +17,9 @@ const words = [
   "żyrafa",
 ];
 
+let trackingCorrectAnswers = 0;
+let trackingIncorrectAnswers = 0;
+
 // Function to find the index of a word in the words array
 function getIndexFromWord(word) {
   return words.indexOf(word);
@@ -167,6 +170,7 @@ function checkForMatch() {
     const textWord = textElement.textContent;
     if (words[imageIndex] === textWord) {
       // Correct match, make opacity 0 and add animations
+      trackingCorrectAnswers++;
       imageElement.style.opacity = "0";
       textElement.style.opacity = "0";
       imageElement.classList.add("animate");
@@ -178,6 +182,7 @@ function checkForMatch() {
       // Incorrect match, add .error class only
       imageElement.classList.add("error");
       textElement.classList.add("error");
+      trackingIncorrectAnswers++;
       // Remove the "error" class after 400ms
       setTimeout(() => {
         imageElement.classList.remove("error");
@@ -266,3 +271,25 @@ function addAnimations() {
     element.addEventListener("focus", triggerAnimation);
   });
 }
+
+document.querySelector(".homeIcon").addEventListener("click", () => {
+  if (trackingCorrectAnswers > 0 || trackingIncorrectAnswers > 0) {
+    const accuracy =
+      (trackingCorrectAnswers /
+        (trackingCorrectAnswers + trackingIncorrectAnswers)) *
+      100;
+    console.log(accuracy);
+    const accuracies =
+      JSON.parse(localStorage.getItem("flashcardMatchupAccuracies")) || [];
+    accuracies.push(accuracy);
+    localStorage.setItem(
+      "flashcardMatchupAccuracies",
+      JSON.stringify(accuracies)
+    );
+
+    localStorage.setItem(
+      "flashcardMatchupPlays",
+      Number(localStorage.getItem("flashcardMatchupPlays")) + 1
+    );
+  }
+});

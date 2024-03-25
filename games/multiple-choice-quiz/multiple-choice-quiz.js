@@ -94,8 +94,15 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+let trackingCorrectAnswers = 0;
+let trackingIncorrectAnswers = 0;
+
 const showRandomWord = function () {
   // addAnimations();
+  if (correctAnswersTotal === 10) {
+    showScore();
+    return;
+  }
 
   if (englishWords.length === 0) {
     showScore();
@@ -121,6 +128,7 @@ const showRandomWord = function () {
     button.onclick = function () {
       if (button.textContent.toLowerCase() === correctAnswerForWord) {
         setTimeout(() => {
+          trackingCorrectAnswers++;
           alert("Correct!");
           showRandomWord();
         }, 300);
@@ -132,6 +140,7 @@ const showRandomWord = function () {
         correctAnswersTotal++;
       } else {
         setTimeout(() => {
+          trackingIncorrectAnswers++;
           alert("Incorrect!");
           showRandomWord();
         }, 300);
@@ -143,6 +152,45 @@ const showRandomWord = function () {
       }
     };
   });
+};
+
+const jsConfetti = new JSConfetti();
+
+const showConfetti = function () {
+  // make a darker overlay element
+  const overlay = document.createElement("div");
+  // style it with a black background and opacity
+  overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  overlay.style.opacity = "0";
+  overlay.style.transition = "opacity 0.5s ease-in-out";
+  overlay.style.position = "absolute";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.zIndex = "100";
+
+  document.body.appendChild(overlay);
+
+  setTimeout(() => {
+    overlay.style.opacity = "0.3";
+  }, 20);
+
+  setTimeout(() => {
+    overlay.style.opacity = "0";
+  }, 3000);
+
+  jsConfetti.addConfetti({
+    confettiRadius: 6,
+    confettiNumber: 500,
+  });
+
+  setTimeout(() => {
+    overlay.style.opacity = "0";
+    setTimeout(() => {
+      overlay.remove();
+    }, 500);
+  }, 2000);
 };
 
 let quizProgress = 1;
@@ -159,7 +207,16 @@ showRandomWord();
 
 const showScore = function () {
   quizProgressElement.textContent = "Quiz complete!";
-  alert(`You got ${correctAnswersTotal} out of 26 correct!`);
+  if (correctAnswersTotal === 10) {
+    showConfetti();
+    setTimeout(() => {
+      alert(`You got all the answers correct!`);
+    }, 2000);
+  } else {
+    setTimeout(() => {
+      alert(`You got ${correctAnswersTotal} out of 10 correct!`);
+    }, 2000);
+  }
 };
 
 window.onload = function () {
@@ -185,3 +242,20 @@ function addAnimations() {
     element.addEventListener("focus", triggerAnimation);
   });
 }
+
+document.querySelector(".homeIcon").addEventListener("click", () => {
+  if (trackingCorrectAnswers > 0 || trackingIncorrectAnswers > 0) {
+    const accuracy =
+      (trackingCorrectAnswers /
+        (trackingCorrectAnswers + trackingIncorrectAnswers)) *
+      100;
+    const accuracies = JSON.parse(localStorage.getItem("quizAccuracies")) || [];
+    accuracies.push(accuracy);
+    localStorage.setItem("quizAccuracies", JSON.stringify(accuracies));
+
+    localStorage.setItem(
+      "quizPlays",
+      Number(localStorage.getItem("quizPlays")) + 1
+    );
+  }
+});

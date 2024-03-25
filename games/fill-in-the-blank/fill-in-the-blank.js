@@ -43,6 +43,9 @@ const submitButton = document.querySelector(".submitButton");
 const progressElement = document.querySelector(".quizProgress");
 const hintElement = document.getElementById("hint");
 
+let trackingCorrectAnswers = 0;
+let trackingIncorrectAnswers = 0;
+
 let quizProgress = 1;
 
 const updateQuizProgress = function () {
@@ -59,6 +62,7 @@ const showRandomSentence = function () {
   const randomIndex = Math.floor(Math.random() * polishSentences.length);
   const randomSentence = polishSentences[randomIndex];
   const correctAnswerForSentence = correctAnswers[randomIndex];
+  console.log(correctAnswerForSentence);
   sentenceElement.textContent = randomSentence;
   hintElement.textContent = hints[randomIndex];
   polishSentences.splice(randomIndex, 1);
@@ -72,11 +76,13 @@ const showRandomSentence = function () {
       submitButton.classList.remove("animate");
 
       if (userInput.value.trim() === correctAnswerForSentence) {
+        trackingCorrectAnswers++;
         alert("Correct!");
         showRandomSentence();
         correctAnswersTotal++;
         userInput.value = "";
       } else {
+        trackingIncorrectAnswers++;
         alert("Incorrect!");
         userInput.value = "";
         showRandomSentence();
@@ -89,6 +95,75 @@ showRandomSentence();
 
 let correctAnswersTotal = 0;
 
-const showScore = function () {
-  alert(`You got ${correctAnswersTotal} out of 10 correct!`);
+const jsConfetti = new JSConfetti();
+
+const showConfetti = function () {
+  // make a darker overlay element
+  const overlay = document.createElement("div");
+  // style it with a black background and opacity
+  overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  overlay.style.opacity = "0";
+  overlay.style.transition = "opacity 0.5s ease-in-out";
+  overlay.style.position = "absolute";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.zIndex = "100";
+
+  document.body.appendChild(overlay);
+
+  setTimeout(() => {
+    overlay.style.opacity = "0.3";
+  }, 20);
+
+  setTimeout(() => {
+    overlay.style.opacity = "0";
+  }, 3000);
+
+  jsConfetti.addConfetti({
+    confettiRadius: 6,
+    confettiNumber: 500,
+  });
+
+  setTimeout(() => {
+    overlay.style.opacity = "0";
+    setTimeout(() => {
+      overlay.remove();
+    }, 500);
+  }, 2000);
 };
+
+const showScore = function () {
+  if (correctAnswersTotal === 10) {
+    showConfetti();
+    setTimeout(() => {
+      alert(`You got all the answers correct!`);
+    }, 2000);
+  } else {
+    setTimeout(() => {
+      alert(`You got ${correctAnswersTotal} out of 10 correct!`);
+    }, 2000);
+  }
+};
+
+document.querySelector(".homeIcon").addEventListener("click", () => {
+  if (trackingCorrectAnswers > 0 || trackingIncorrectAnswers > 0) {
+    const accuracy =
+      (trackingCorrectAnswers /
+        (trackingCorrectAnswers + trackingIncorrectAnswers)) *
+      100;
+    const accuracies =
+      JSON.parse(localStorage.getItem("fillInTheBlankAccuracies")) || [];
+    accuracies.push(accuracy);
+    localStorage.setItem(
+      "fillInTheBlankAccuracies",
+      JSON.stringify(accuracies)
+    );
+
+    localStorage.setItem(
+      "fillInTheBlankPlays",
+      Number(localStorage.getItem("fillInTheBlankPlays")) + 1
+    );
+  }
+});
