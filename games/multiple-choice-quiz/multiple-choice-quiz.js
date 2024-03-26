@@ -99,7 +99,7 @@ let trackingIncorrectAnswers = 0;
 
 const showRandomWord = function () {
   // addAnimations();
-  if (correctAnswersTotal === 10) {
+  if (correctAnswersTotal === 26) {
     showScore();
     return;
   }
