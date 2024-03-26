@@ -160,7 +160,7 @@ gameButtons {
 }
 
 .game-stats-modal-content {
-  width: 16rem;
+  width: 20rem;
   height: auto;
   background-color: #fff;
   border-radius: 10px;
@@ -170,7 +170,8 @@ gameButtons {
   gap: 1rem;
 
   .game-stats-modal-title {
-    font-size: 1.5rem;
+    text-decoration: underline;
+    font-size: 2rem;
     font-weight: 600;
     color: #424843;
   }

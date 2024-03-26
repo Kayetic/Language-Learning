@@ -17,7 +17,7 @@ document
 const quizAccuracies = JSON.parse(localStorage.getItem("quizAccuracies")) || [];
 
 const flashcardAccuracies =
-  JSON.parse(localStorage.getItem("flashcardAccuracies")) || [];
+  JSON.parse(localStorage.getItem("flashcardMatchupAccuracies")) || [];
 
 const fillInTheBlankAccuracies =
   JSON.parse(localStorage.getItem("fillInTheBlankAccuracies")) || [];
@@ -25,14 +25,15 @@ const fillInTheBlankAccuracies =
 const audioAccuracies =
   JSON.parse(localStorage.getItem("audioAccuracies")) || [];
 
-const quizPlays = JSON.parse(localStorage.getItem("quizPlays")) || 0;
+const quizPlays = Number(localStorage.getItem("quizPlays")) || 0;
 
-const flashcardPlays = JSON.parse(localStorage.getItem("flashcardPlays")) || 0;
+const flashcardPlays =
+  Number(localStorage.getItem("flashcardMatchupPlays")) || 0;
 
 const fillInTheBlankPlays =
-  JSON.parse(localStorage.getItem("fillInTheBlankPlays")) || 0;
+  Number(localStorage.getItem("fillInTheBlankPlays")) || 0;
 
-const audioPlays = JSON.parse(localStorage.getItem("audioPlays")) || 0;
+const audioPlays = Number(localStorage.getItem("audioPlays")) || 0;
 
 function average(array) {
   if (array.length === 0 || array.length === 1) {
@@ -42,50 +43,75 @@ function average(array) {
   }
 }
 
-document.querySelector(
-  ".quizAccuracy"
-).textContent = `Average accuracy: ${average(quizAccuracies)}%`;
+if (quizAccuracies.length > 0) {
+  document.querySelector(
+    ".quizAccuracy"
+  ).textContent = `Average accuracy: ${average(quizAccuracies).toFixed(0)}%`;
+} else {
+  document.querySelector(".quizAccuracy").textContent = "Not played yet";
+  document.querySelector(".quizAccuracy").style.opacity = "0.5";
+}
 
-console.log("Quiz accuracies:");
-console.log(quizAccuracies);
-console.log(average(quizAccuracies));
+if (flashcardAccuracies.length > 0) {
+  document.querySelector(
+    ".flashcardAccuracy"
+  ).textContent = `Average accuracy: ${average(flashcardAccuracies).toFixed(
+    0
+  )}%`;
+} else {
+  document.querySelector(".flashcardAccuracy").textContent = "Not played yet";
+  document.querySelector(".flashcardAccuracy").style.opacity = "0.5";
+}
 
-document.querySelector(
-  ".flashcardAccuracy"
-).textContent = `Average accuracy: ${average(flashcardAccuracies)}%`;
+if (fillInTheBlankAccuracies.length > 0) {
+  document.querySelector(
+    ".fillInTheBlankAccuracy"
+  ).textContent = `Average accuracy: ${average(
+    fillInTheBlankAccuracies
+  ).toFixed(0)}%`;
+} else {
+  document.querySelector(".fillInTheBlankAccuracy").textContent =
+    "Not played yet";
+  document.querySelector(".fillInTheBlankAccuracy").style.opacity = "0.5";
+}
 
-console.log("Flashcard accuracies:");
-console.log(flashcardAccuracies);
-console.log(average(flashcardAccuracies));
+if (audioAccuracies.length > 0) {
+  document.querySelector(
+    ".audioAccuracy"
+  ).textContent = `Average accuracy: ${average(audioAccuracies).toFixed(0)}%`;
+} else {
+  document.querySelector(".audioAccuracy").textContent = "Not played yet";
+  document.querySelector(".audioAccuracy").style.opacity = "0.5";
+}
 
-document.querySelector(
-  ".fillInTheBlankAccuracy"
-).textContent = `Average accuracy: ${average(fillInTheBlankAccuracies)}%`;
+if (quizPlays > 0) {
+  document.querySelector(
+    ".quizPlays"
+  ).textContent = `Number of times played: ${quizPlays}`;
+} else {
+  document.querySelector(".quizPlays").style.display = "none";
+}
 
-console.log("Fill in the blank accuracies:");
-console.log(fillInTheBlankAccuracies);
-console.log(average(fillInTheBlankAccuracies));
+if (flashcardPlays > 0) {
+  document.querySelector(
+    ".flashcardPlays"
+  ).textContent = `Number of times played: ${flashcardPlays}`;
+} else {
+  document.querySelector(".flashcardPlays").style.display = "none";
+}
 
-document.querySelector(
-  ".audioAccuracy"
-).textContent = `Average accuracy: ${average(audioAccuracies)}%`;
+if (fillInTheBlankPlays > 0) {
+  document.querySelector(
+    ".fillInTheBlankPlays"
+  ).textContent = `Number of times played: ${fillInTheBlankPlays}`;
+} else {
+  document.querySelector(".fillInTheBlankPlays").style.display = "none";
+}
 
-console.log("Audio accuracies:");
-console.log(audioAccuracies);
-console.log(average(audioAccuracies));
-
-document.querySelector(
-  ".quizPlays"
-).textContent = `Number of times played: ${quizPlays}`;
-
-document.querySelector(
-  ".flashcardPlays"
-).textContent = `Number of times played: ${flashcardPlays}`;
-
-document.querySelector(
-  ".fillInTheBlankPlays"
-).textContent = `Number of times played: ${fillInTheBlankPlays}`;
-
-document.querySelector(
-  ".audioPlays"
-).textContent = `Number of times played: ${audioPlays}`;
+if (audioPlays > 0) {
+  document.querySelector(
+    ".audioPlays"
+  ).textContent = `Number of times played: ${audioPlays}`;
+} else {
+  document.querySelector(".audioPlays").style.display = "none";
+}
